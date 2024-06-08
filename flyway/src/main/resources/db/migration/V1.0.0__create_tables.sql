@@ -13,5 +13,5 @@ CREATE TABLE supplements
     expired_at             DATE         NOT NULL,
     start_at               DATE         NOT NULL,
     end_dat                DATE         NOT NULL,
-    group_name             INT REFERENCES supplement_group (name)
+    group_name VARCHAR(255) REFERENCES supplement_group (name)
 );
