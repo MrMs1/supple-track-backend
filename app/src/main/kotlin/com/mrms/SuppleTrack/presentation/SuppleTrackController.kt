@@ -1,5 +1,6 @@
 package com.mrms.suppletrack.presentation
 
+import com.mrms.suppletrack.domain.supplement.Supplement
 import com.mrms.suppletrack.presentation.convertor.toCommand
 import com.mrms.suppletrack.presentation.dto.SupplementRegisterDto
 import com.mrms.suppletrack.usecase.SupplementUseCase
@@ -26,8 +27,9 @@ class SuppleTrackController
             return ResponseEntity.ok().build()
         }
 
-        @GetMapping("/supplement")
-        fun getSupplement() {
-            TODO()
+        @GetMapping("/supplements")
+        fun getSupplements(): ResponseEntity<List<Supplement>> {
+            val results = supplementUseCase.findAllSupplements()
+            return ResponseEntity.ok(results)
         }
     }

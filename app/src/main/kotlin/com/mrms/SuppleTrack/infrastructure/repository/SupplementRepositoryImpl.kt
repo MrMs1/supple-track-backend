@@ -37,4 +37,23 @@ class SupplementRepositoryImpl
                 supplement.groupName,
             ).execute()
         }
+
+        override fun findAll(): List<Supplement> {
+            return context.selectFrom(SUPPLEMENTS)
+                .orderBy(SUPPLEMENTS.CREATED_AT.desc())
+                .fetch()
+                .map {
+                    Supplement(
+                        id = it.id,
+                        name = it.name,
+                        dosagePerUse = it.dosagePerUse,
+                        quantity = it.quantity,
+                        dailyIntakeFrequency = it.dailyIntakeFrequency,
+                        expiredAt = it.expiredAt,
+                        startAt = it.startAt,
+                        endAt = it.endAt,
+                        groupName = it.groupName,
+                    )
+                }
+        }
     }

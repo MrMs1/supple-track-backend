@@ -25,4 +25,8 @@ class SupplementUseCase
                 )
             supplementRepository.save(supplement)
         }
+
+        fun findAllSupplements(): List<Supplement> {
+            return supplementRepository.findAll()
+        }
     }

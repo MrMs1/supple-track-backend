@@ -4,4 +4,6 @@ import com.mrms.suppletrack.domain.supplement.Supplement
 
 interface SupplementRepository {
     fun save(supplement: Supplement)
+
+    fun findAll(): List<Supplement>
 }
