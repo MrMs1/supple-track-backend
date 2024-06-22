@@ -5,15 +5,17 @@ plugins {
     id("io.spring.dependency-management")
     kotlin("jvm")
     kotlin("plugin.spring")
+    id("org.jlleitschuh.gradle.ktlint") version "12.1.1"
 }
 
 dependencies {
-    implementation("org.jooq:jooq")
-    implementation("org.jooq:jooq-meta")
-    implementation("org.jooq:jooq-codegen")
+    implementation(project(":flyway"))
+
+    implementation("org.springframework.boot:spring-boot-starter-jooq")
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.flywaydb:flyway-core")
+    implementation("org.flywaydb:flyway-database-postgresql")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
 
     testImplementation("org.springframework.boot:spring-boot-starter-test")
@@ -24,7 +26,6 @@ java {
     sourceCompatibility = JavaVersion.VERSION_17
     targetCompatibility = JavaVersion.VERSION_17
 }
-
 
 tasks.withType<Test> {
     useJUnitPlatform()

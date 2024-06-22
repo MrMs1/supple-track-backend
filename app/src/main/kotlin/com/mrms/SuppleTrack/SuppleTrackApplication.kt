@@ -1,4 +1,4 @@
-package com.mrms.SuppleTrack
+package com.mrms.suppletrack
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
@@ -7,5 +7,5 @@ import org.springframework.boot.runApplication
 class SuppleTrackApplication
 
 fun main(args: Array<String>) {
-	runApplication<SuppleTrackApplication>(*args)
+    runApplication<SuppleTrackApplication>(*args)
 }

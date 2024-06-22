@@ -1,3 +1,13 @@
 spring:
   application:
-    name: SuppleTrack
+    name: suppletrack
+  datasource:
+    url: jdbc:postgresql://localhost:5432/suppletrack
+    username: postgres
+    password: password
+    driver-class-name: org.postgresql.Driver
+  jooq:
+    sql-dialect: POSTGRES
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
