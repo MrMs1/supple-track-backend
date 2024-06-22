@@ -8,9 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
+import java.util.UUID
 
 @Controller
 @RequestMapping("/api")
@@ -31,5 +33,18 @@ class SuppleTrackController
         fun getSupplements(): ResponseEntity<List<Supplement>> {
             val results = supplementUseCase.findAllSupplements()
             return ResponseEntity.ok(results)
+        }
+
+        @GetMapping("/supplement/{id}")
+        fun getSupplementById(
+            @PathVariable id: UUID,
+        ): ResponseEntity<Supplement> {
+            supplementUseCase.findSupplementById(id).let { result ->
+                return if (result != null) {
+                    ResponseEntity.ok(result)
+                } else {
+                    ResponseEntity.notFound().build()
+                }
+            }
         }
     }

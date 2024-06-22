@@ -5,6 +5,7 @@ import com.mrms.suppletrack.domain.supplement.Supplement
 import com.mrms.suppletrack.usecase.dto.SupplementRegisterCommand
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
+import java.util.UUID
 
 @Service
 class SupplementUseCase
@@ -28,5 +29,9 @@ class SupplementUseCase
 
         fun findAllSupplements(): List<Supplement> {
             return supplementRepository.findAll()
+        }
+
+        fun findSupplementById(id: UUID): Supplement? {
+            return supplementRepository.findById(id)
         }
     }

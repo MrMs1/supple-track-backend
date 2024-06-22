@@ -6,6 +6,8 @@ import org.jooq.DSLContext
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Repository
 import supplement.Tables.SUPPLEMENTS
+import supplement.tables.records.SupplementsRecord
+import java.util.UUID
 
 @Repository
 class SupplementRepositoryImpl
@@ -43,17 +45,28 @@ class SupplementRepositoryImpl
                 .orderBy(SUPPLEMENTS.CREATED_AT.desc())
                 .fetch()
                 .map {
-                    Supplement(
-                        id = it.id,
-                        name = it.name,
-                        dosagePerUse = it.dosagePerUse,
-                        quantity = it.quantity,
-                        dailyIntakeFrequency = it.dailyIntakeFrequency,
-                        expiredAt = it.expiredAt,
-                        startAt = it.startAt,
-                        endAt = it.endAt,
-                        groupName = it.groupName,
-                    )
+                    it.toSupplement()
                 }
+        }
+
+        override fun findById(id: UUID): Supplement? {
+            return context.selectFrom(SUPPLEMENTS)
+                .where(SUPPLEMENTS.ID.eq(id))
+                .fetchOne()
+                ?.toSupplement()
+        }
+
+        private fun SupplementsRecord.toSupplement(): Supplement {
+            return Supplement(
+                id = this.id,
+                name = this.name,
+                dosagePerUse = this.dosagePerUse,
+                quantity = this.quantity,
+                dailyIntakeFrequency = this.dailyIntakeFrequency,
+                expiredAt = this.expiredAt,
+                startAt = this.startAt,
+                endAt = this.endAt,
+                groupName = this.groupName,
+            )
         }
     }
