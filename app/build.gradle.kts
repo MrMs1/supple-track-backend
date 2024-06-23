@@ -37,3 +37,13 @@ tasks.withType<KotlinCompile> {
         jvmTarget = "17"
     }
 }
+
+tasks.register<Copy>("installGitHooks") {
+    from("scripts/pre-commit")
+    into(".git/hooks")
+    rename { "pre-commit" }
+}
+
+tasks.build {
+    dependsOn("installGitHooks")
+}
