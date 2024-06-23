@@ -8,6 +8,7 @@ import com.mrms.suppletrack.usecase.SupplementUseCase
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Controller
+import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PatchMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -71,6 +72,14 @@ class SuppleTrackController
             @RequestBody groupName: String?,
         ): ResponseEntity<Unit> {
             supplementUseCase.updateSupplementGroup(id, groupName)
+            return ResponseEntity.noContent().build()
+        }
+
+        @DeleteMapping("/supplement/{id}")
+        fun deleteSupplement(
+            @PathVariable id: UUID,
+        ): ResponseEntity<Unit> {
+            supplementUseCase.deleteSupplement(id)
             return ResponseEntity.noContent().build()
         }
     }

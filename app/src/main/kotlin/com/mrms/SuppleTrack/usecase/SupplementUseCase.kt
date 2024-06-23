@@ -62,4 +62,9 @@ class SupplementUseCase
             val newSupplement = supplement.updateGroup(groupName)
             supplementRepository.updateGroup(newSupplement)
         }
+
+        fun deleteSupplement(id: UUID) {
+            val supplement = supplementRepository.findById(id) ?: throw Exception()
+            supplementRepository.delete(supplement)
+        }
     }

@@ -92,6 +92,12 @@ class SupplementRepositoryImpl
                 .execute()
         }
 
+        override fun delete(supplement: Supplement) {
+            context.deleteFrom(SUPPLEMENTS)
+                .where(SUPPLEMENTS.ID.eq(supplement.id))
+                .execute()
+        }
+
         private fun createSupplementGroup(supplement: Supplement) {
             if (supplement.groupName != null) {
                 val isNewGroup =
