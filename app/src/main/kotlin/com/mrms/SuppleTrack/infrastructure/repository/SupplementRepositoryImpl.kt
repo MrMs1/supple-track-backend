@@ -17,6 +17,25 @@ class SupplementRepositoryImpl
         private val context: DSLContext,
     ) : SupplementRepository {
         override fun save(supplement: Supplement) {
+            // 新規のサプリメントグループは登録する
+            if (supplement.groupName != null) {
+                val isNewGroup =
+                    context.select(SUPPLEMENT_GROUP.NAME)
+                        .from(SUPPLEMENT_GROUP)
+                        .where(SUPPLEMENT_GROUP.NAME.eq(supplement.groupName))
+                        .fetchOne()
+                        ?.value1() == null
+
+                if (isNewGroup) {
+                    context.insertInto(
+                        SUPPLEMENT_GROUP,
+                        SUPPLEMENT_GROUP.NAME,
+                    ).values(
+                        supplement.groupName,
+                    ).execute()
+                }
+            }
+
             context.insertInto(
                 SUPPLEMENTS,
                 SUPPLEMENTS.ID,
