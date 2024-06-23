@@ -32,6 +32,10 @@ class SupplementUseCase
             return supplementRepository.findAll()
         }
 
+        fun findAllSupplementGroup(): List<String> {
+            return supplementRepository.findAllGroup()
+        }
+
         fun findSupplementById(id: UUID): Supplement? {
             return supplementRepository.findById(id)
         }

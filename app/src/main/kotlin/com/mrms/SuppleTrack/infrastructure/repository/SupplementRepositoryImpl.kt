@@ -6,6 +6,7 @@ import org.jooq.DSLContext
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Repository
 import supplement.Tables.SUPPLEMENTS
+import supplement.Tables.SUPPLEMENT_GROUP
 import supplement.tables.records.SupplementsRecord
 import java.util.UUID
 
@@ -46,6 +47,16 @@ class SupplementRepositoryImpl
                 .fetch()
                 .map {
                     it.toSupplement()
+                }
+        }
+
+        override fun findAllGroup(): List<String> {
+            return context.select(SUPPLEMENT_GROUP.NAME)
+                .from(SUPPLEMENT_GROUP)
+                .orderBy(SUPPLEMENT_GROUP.CREATED_AT.asc())
+                .fetch()
+                .map {
+                    it.value1()
                 }
         }
 

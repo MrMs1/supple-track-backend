@@ -37,6 +37,12 @@ class SuppleTrackController
             return ResponseEntity.ok(results)
         }
 
+        @GetMapping("/supplement-group/")
+        fun getSupplementGroup(): ResponseEntity<List<String>> {
+            val results = supplementUseCase.findAllSupplementGroup()
+            return ResponseEntity.ok(results)
+        }
+
         @GetMapping("/supplement/{id}")
         fun getSupplementById(
             @PathVariable id: UUID,

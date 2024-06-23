@@ -8,6 +8,8 @@ interface SupplementRepository {
 
     fun findAll(): List<Supplement>
 
+    fun findAllGroup(): List<String>
+
     fun findById(id: UUID): Supplement?
 
     fun update(supplement: Supplement)
