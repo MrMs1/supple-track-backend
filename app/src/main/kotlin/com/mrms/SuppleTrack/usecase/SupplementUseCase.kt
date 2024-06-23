@@ -67,4 +67,8 @@ class SupplementUseCase
             val supplement = supplementRepository.findById(id) ?: throw Exception()
             supplementRepository.delete(supplement)
         }
+
+        fun deleteSupplementGroup(groupName: String) {
+            val supplements = supplementRepository.deleteGroup(groupName)
+        }
     }

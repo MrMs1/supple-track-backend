@@ -17,4 +17,6 @@ interface SupplementRepository {
     fun updateGroup(supplement: Supplement)
 
     fun delete(supplement: Supplement)
+
+    fun deleteGroup(groupName: String)
 }

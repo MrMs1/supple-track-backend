@@ -98,6 +98,16 @@ class SupplementRepositoryImpl
                 .execute()
         }
 
+        override fun deleteGroup(groupName: String) {
+            context.update(SUPPLEMENTS)
+                .setNull(SUPPLEMENTS.GROUP_NAME)
+                .where(SUPPLEMENTS.GROUP_NAME.eq(groupName))
+                .execute()
+            context.deleteFrom(SUPPLEMENT_GROUP)
+                .where(SUPPLEMENT_GROUP.NAME.eq(groupName))
+                .execute()
+        }
+
         private fun createSupplementGroup(supplement: Supplement) {
             if (supplement.groupName != null) {
                 val isNewGroup =

@@ -82,4 +82,12 @@ class SuppleTrackController
             supplementUseCase.deleteSupplement(id)
             return ResponseEntity.noContent().build()
         }
+
+        @DeleteMapping("/supplement/group")
+        fun deleteSupplementGroup(
+            @RequestBody groupName: String,
+        ): ResponseEntity<Unit> {
+            supplementUseCase.deleteSupplementGroup(groupName)
+            return ResponseEntity.noContent().build()
+        }
     }
