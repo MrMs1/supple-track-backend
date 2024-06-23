@@ -5,14 +5,14 @@ files=$(git diff --cached --name-only --diff-filter=ACM | grep '\.kt[s"]\?$')
 
 # ステージングされたファイルがない場合は終了
 if [ -z "$files" ]; then
-  exit 0
+exit 0
 fi
 
 # ktlintFormatを実行
 echo "Running ktlintFormat..."
-echo "$files" | xargs ./gradlew ktlintFormat
+./gradlew ktlintFormat
 
 # 修正されたファイルを再度ステージング
-echo "$files" | xargs git add
+git add -u
 
 exit 0
