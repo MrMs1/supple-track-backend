@@ -56,6 +56,19 @@ class SupplementRepositoryImpl
                 ?.toSupplement()
         }
 
+        override fun update(supplement: Supplement) {
+            context.update(SUPPLEMENTS)
+                .set(SUPPLEMENTS.NAME, supplement.name)
+                .set(SUPPLEMENTS.DOSAGE_PER_USE, supplement.dosagePerUse)
+                .set(SUPPLEMENTS.QUANTITY, supplement.quantity)
+                .set(SUPPLEMENTS.DAILY_INTAKE_FREQUENCY, supplement.dailyIntakeFrequency)
+                .set(SUPPLEMENTS.EXPIRED_AT, supplement.expiredAt)
+                .set(SUPPLEMENTS.START_AT, supplement.startAt)
+                .set(SUPPLEMENTS.END_AT, supplement.endAt)
+                .where(SUPPLEMENTS.ID.eq(supplement.id))
+                .execute()
+        }
+
         private fun SupplementsRecord.toSupplement(): Supplement {
             return Supplement(
                 id = this.id,

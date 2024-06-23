@@ -9,4 +9,6 @@ interface SupplementRepository {
     fun findAll(): List<Supplement>
 
     fun findById(id: UUID): Supplement?
+
+    fun update(supplement: Supplement)
 }

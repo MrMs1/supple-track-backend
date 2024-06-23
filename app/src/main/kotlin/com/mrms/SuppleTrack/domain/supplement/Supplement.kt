@@ -24,9 +24,6 @@ data class Supplement(
             startAt: LocalDate,
             groupName: String? = null,
         ): Supplement {
-            val daysOfConsumption = quantity / (dosagePerUse * dailyIntakeFrequency)
-            val endAt = startAt.plusDays(daysOfConsumption.toLong())
-
             return Supplement(
                 id = UUID.randomUUID(),
                 name = name,
@@ -35,9 +32,55 @@ data class Supplement(
                 dailyIntakeFrequency = dailyIntakeFrequency,
                 expiredAt = expiredAt,
                 startAt = startAt,
-                endAt = endAt,
+                endAt =
+                    calculateEndAt(
+                        quantity = quantity,
+                        dosagePerUse = dosagePerUse,
+                        dailyIntakeFrequency = dailyIntakeFrequency,
+                        startAt = startAt,
+                    ),
                 groupName = groupName,
             )
         }
+
+        fun calculateEndAt(
+            quantity: Int,
+            dosagePerUse: Int,
+            dailyIntakeFrequency: Int,
+            startAt: LocalDate,
+        ): LocalDate {
+            val daysOfConsumption = quantity / (dosagePerUse * dailyIntakeFrequency)
+            return startAt.plusDays(daysOfConsumption.toLong())
+        }
+    }
+
+    fun update(
+        name: String?,
+        quantity: Int?,
+        dosagePerUse: Int?,
+        dailyIntakeFrequency: Int?,
+        expiredAt: LocalDate?,
+        startAt: LocalDate?,
+    ): Supplement {
+        val newQuantity = quantity ?: this.quantity
+        val newDosagePerUse = dosagePerUse ?: this.dosagePerUse
+        val newDailyIntakeFrequency = dailyIntakeFrequency ?: this.dailyIntakeFrequency
+        val newStartAt = startAt ?: this.startAt
+
+        return this.copy(
+            name = name ?: this.name,
+            quantity = newQuantity,
+            dosagePerUse = newDosagePerUse,
+            dailyIntakeFrequency = newDailyIntakeFrequency,
+            expiredAt = expiredAt ?: this.expiredAt,
+            startAt = newStartAt,
+            endAt =
+                calculateEndAt(
+                    quantity = newQuantity,
+                    dosagePerUse = newDosagePerUse,
+                    dailyIntakeFrequency = newDailyIntakeFrequency,
+                    startAt = newStartAt,
+                ),
+        )
     }
 }

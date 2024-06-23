@@ -12,8 +12,8 @@ import java.util.stream.Stream
 private class SupplementTest {
     @Nested
     @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-    inner class Create {
-        private fun createSupplementParams(): Stream<Arguments> {
+    inner class CalculateEndAt {
+        private fun calculateParams(): Stream<Arguments> {
             return Stream.of(
                 Arguments.of(LocalDate.of(2024, 6, 22), 1000, 10, 3, LocalDate.of(2024, 7, 25)),
                 Arguments.of(LocalDate.of(2024, 6, 22), 300, 2, 1, LocalDate.of(2024, 11, 19)),
@@ -24,7 +24,7 @@ private class SupplementTest {
         }
 
         @ParameterizedTest
-        @MethodSource("createSupplementParams")
+        @MethodSource("calculateParams")
         fun `総量、一回あたりの摂取量、1日あたりの摂取回数から摂取終了日を計算できる`(
             startAt: LocalDate,
             quantity: Int,
@@ -32,17 +32,15 @@ private class SupplementTest {
             dailyIntakeFrequency: Int,
             endAt: LocalDate,
         ) {
-            val supplement =
-                Supplement.create(
-                    "サプリメント",
+            val actual =
+                Supplement.calculateEndAt(
                     quantity,
                     dosagePerUse,
                     dailyIntakeFrequency,
-                    LocalDate.of(2021, 1, 1),
                     startAt,
                 )
 
-            assertEquals(endAt, supplement.endAt)
+            assertEquals(endAt, actual)
         }
     }
 }
