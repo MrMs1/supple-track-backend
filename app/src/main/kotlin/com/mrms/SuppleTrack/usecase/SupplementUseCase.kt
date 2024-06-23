@@ -53,4 +53,13 @@ class SupplementUseCase
                 )
             supplementRepository.update(newSupplement)
         }
+
+        fun updateSupplementGroup(
+            id: UUID,
+            groupName: String?,
+        ) {
+            val supplement = supplementRepository.findById(id) ?: throw Exception()
+            val newSupplement = supplement.updateGroup(groupName)
+            supplementRepository.updateGroup(newSupplement)
+        }
     }

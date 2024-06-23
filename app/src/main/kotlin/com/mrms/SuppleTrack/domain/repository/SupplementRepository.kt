@@ -13,4 +13,6 @@ interface SupplementRepository {
     fun findById(id: UUID): Supplement?
 
     fun update(supplement: Supplement)
+
+    fun updateGroup(supplement: Supplement)
 }

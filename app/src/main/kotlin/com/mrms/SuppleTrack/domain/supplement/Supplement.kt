@@ -83,4 +83,8 @@ data class Supplement(
                 ),
         )
     }
+
+    fun updateGroup(groupName: String?): Supplement {
+        return this.copy(groupName = groupName)
+    }
 }

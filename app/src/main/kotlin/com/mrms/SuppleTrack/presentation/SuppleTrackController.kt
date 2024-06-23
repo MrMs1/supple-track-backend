@@ -64,4 +64,13 @@ class SuppleTrackController
             supplementUseCase.updateSupplement(supplementUpdateDto.toCommand(id))
             return ResponseEntity.noContent().build()
         }
+
+        @PatchMapping("/supplement/{id}/group")
+        fun updateSupplementGroup(
+            @PathVariable id: UUID,
+            @RequestBody groupName: String?,
+        ): ResponseEntity<Unit> {
+            supplementUseCase.updateSupplementGroup(id, groupName)
+            return ResponseEntity.noContent().build()
+        }
     }
