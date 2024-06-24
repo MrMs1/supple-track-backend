@@ -1,5 +1,6 @@
 package com.mrms.suppletrack.usecase
 
+import com.mrms.suppletrack.domain.exception.DomainNotFoundException
 import com.mrms.suppletrack.domain.repository.SupplementRepository
 import com.mrms.suppletrack.domain.supplement.Supplement
 import com.mrms.suppletrack.usecase.dto.SupplementRegisterCommand
@@ -41,7 +42,7 @@ class SupplementUseCase
         }
 
         fun updateSupplement(command: SupplementUpdateCommand) {
-            val supplement = supplementRepository.findById(command.id) ?: throw Exception()
+            val supplement = supplementRepository.findById(command.id) ?: throw DomainNotFoundException("対象のサプリメントが見つかりません。 id: ${command.id}")
             val newSupplement =
                 supplement.update(
                     command.name,
@@ -58,13 +59,13 @@ class SupplementUseCase
             id: UUID,
             groupName: String?,
         ) {
-            val supplement = supplementRepository.findById(id) ?: throw Exception()
+            val supplement = supplementRepository.findById(id) ?: throw DomainNotFoundException("対象のサプリメントが見つかりません。 id: $id")
             val newSupplement = supplement.updateGroup(groupName)
             supplementRepository.updateGroup(newSupplement)
         }
 
         fun deleteSupplement(id: UUID) {
-            val supplement = supplementRepository.findById(id) ?: throw Exception()
+            val supplement = supplementRepository.findById(id) ?: throw DomainNotFoundException("対象のサプリメントが見つかりません。 id: $id")
             supplementRepository.delete(supplement)
         }
 
