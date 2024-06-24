@@ -69,6 +69,6 @@ class SupplementUseCase
         }
 
         fun deleteSupplementGroup(groupName: String) {
-            val supplements = supplementRepository.deleteGroup(groupName)
+            supplementRepository.deleteGroup(groupName)
         }
     }
