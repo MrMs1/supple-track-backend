@@ -137,7 +137,6 @@ class SupplementRepositoryImpl
                 dailyIntakeFrequency = this.dailyIntakeFrequency,
                 expiredAt = this.expiredAt,
                 startAt = this.startAt,
-                endAt = this.endAt,
                 groupName = this.groupName,
             )
         }

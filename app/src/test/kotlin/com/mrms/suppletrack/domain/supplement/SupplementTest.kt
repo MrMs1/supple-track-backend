@@ -12,7 +12,7 @@ import java.util.stream.Stream
 private class SupplementTest {
     @Nested
     @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-    inner class CalculateEndAt {
+    inner class EndAt {
         private fun calculateParams(): Stream<Arguments> {
             return Stream.of(
                 Arguments.of(LocalDate.of(2024, 6, 22), 1000, 10, 3, LocalDate.of(2024, 7, 25)),
@@ -25,7 +25,7 @@ private class SupplementTest {
 
         @ParameterizedTest
         @MethodSource("calculateParams")
-        fun `総量、一回あたりの摂取量、1日あたりの摂取回数から摂取終了日を計算できる`(
+        fun `総量、一回あたりの摂取量、1日あたりの摂取回数から算出された摂取終了日が取得できる`(
             startAt: LocalDate,
             quantity: Int,
             dosagePerUse: Int,
@@ -33,14 +33,16 @@ private class SupplementTest {
             endAt: LocalDate,
         ) {
             val actual =
-                Supplement.calculateEndAt(
+                Supplement.create(
+                    "サプリメント",
                     quantity,
                     dosagePerUse,
                     dailyIntakeFrequency,
+                    LocalDate.of(2025, 6, 22),
                     startAt,
                 )
 
-            assertEquals(endAt, actual)
+            assertEquals(endAt, actual.endAt)
         }
     }
 }
