@@ -3,10 +3,10 @@ package com.mrms.suppletrack.presentation.advice
 import com.mrms.suppletrack.domain.exception.DomainNotFoundException
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.ControllerAdvice
 import org.springframework.web.bind.annotation.ExceptionHandler
+import org.springframework.web.bind.annotation.RestControllerAdvice
 
-@ControllerAdvice
+@RestControllerAdvice
 class ExceptionHandler {
     @ExceptionHandler(DomainNotFoundException::class)
     fun handleDomainNotFoundException(e: DomainNotFoundException): ResponseEntity<String> {
