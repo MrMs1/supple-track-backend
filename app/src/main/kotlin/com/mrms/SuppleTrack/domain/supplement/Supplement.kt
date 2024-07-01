@@ -11,14 +11,9 @@ data class Supplement(
     val dailyIntakeFrequency: Int,
     val expiredAt: LocalDate,
     val startAt: LocalDate,
+    val endAt: LocalDate,
     val groupName: String?,
 ) {
-    val endAt: LocalDate
-        get() {
-            val daysOfConsumption = quantity / (dosagePerUse * dailyIntakeFrequency)
-            return startAt.plusDays(daysOfConsumption.toLong())
-        }
-
     companion object {
         fun create(
             name: String,
@@ -37,8 +32,25 @@ data class Supplement(
                 dailyIntakeFrequency = dailyIntakeFrequency,
                 expiredAt = expiredAt,
                 startAt = startAt,
+                endAt =
+                    calculateEndAt(
+                        quantity = quantity,
+                        dosagePerUse = dosagePerUse,
+                        dailyIntakeFrequency = dailyIntakeFrequency,
+                        startAt = startAt,
+                    ),
                 groupName = groupName,
             )
+        }
+
+        fun calculateEndAt(
+            quantity: Int,
+            dosagePerUse: Int,
+            dailyIntakeFrequency: Int,
+            startAt: LocalDate,
+        ): LocalDate {
+            val daysOfConsumption = quantity / (dosagePerUse * dailyIntakeFrequency)
+            return startAt.plusDays(daysOfConsumption.toLong())
         }
     }
 
@@ -62,6 +74,13 @@ data class Supplement(
             dailyIntakeFrequency = newDailyIntakeFrequency,
             expiredAt = expiredAt ?: this.expiredAt,
             startAt = newStartAt,
+            endAt =
+                calculateEndAt(
+                    quantity = newQuantity,
+                    dosagePerUse = newDosagePerUse,
+                    dailyIntakeFrequency = newDailyIntakeFrequency,
+                    startAt = newStartAt,
+                ),
         )
     }
 
