@@ -5,7 +5,7 @@ package supplement;
 
 
 import supplement.tables.FlywaySchemaHistory;
-import supplement.tables.SupplementGroup;
+import supplement.tables.Items;
 import supplement.tables.Supplements;
 
 
@@ -21,9 +21,9 @@ public class Tables {
     public static final FlywaySchemaHistory FLYWAY_SCHEMA_HISTORY = FlywaySchemaHistory.FLYWAY_SCHEMA_HISTORY;
 
     /**
-     * サプリメントグループテーブル
+     * 商品テーブル
      */
-    public static final SupplementGroup SUPPLEMENT_GROUP = SupplementGroup.SUPPLEMENT_GROUP;
+    public static final Items ITEMS = Items.ITEMS;
 
     /**
      * サプリメントテーブル

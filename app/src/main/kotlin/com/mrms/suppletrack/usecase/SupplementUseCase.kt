@@ -1,0 +1,28 @@
+package com.mrms.suppletrack.usecase
+
+import com.mrms.suppletrack.domain.repository.SupplementRepository
+import com.mrms.suppletrack.domain.supplement.Supplement
+import com.mrms.suppletrack.domain.supplement.SupplementService
+import com.mrms.suppletrack.usecase.dto.SupplementRegisterCommand
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.stereotype.Service
+
+@Service
+class SupplementUseCase
+    @Autowired
+    constructor(
+        private val supplementRepository: SupplementRepository,
+        private val supplementService: SupplementService,
+    ) {
+        fun createSupplement(command: SupplementRegisterCommand): Supplement {
+            return supplementService.createSupplement(
+                command.supplementName,
+                command.itemName,
+                command.quantity,
+                command.dosagePerUse,
+                command.dailyIntakeFrequency,
+                command.expiredAt,
+                command.startAt,
+            )
+        }
+    }

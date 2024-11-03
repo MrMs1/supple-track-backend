@@ -4,16 +4,15 @@
 package supplement.tables;
 
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
-import java.util.UUID;
 
 import org.jooq.Condition;
 import org.jooq.Field;
 import org.jooq.ForeignKey;
+import org.jooq.Identity;
 import org.jooq.InverseForeignKey;
 import org.jooq.Name;
 import org.jooq.Path;
@@ -34,7 +33,7 @@ import org.jooq.impl.TableImpl;
 
 import supplement.Keys;
 import supplement.Public;
-import supplement.tables.SupplementGroup.SupplementGroupPath;
+import supplement.tables.Items.ItemsPath;
 import supplement.tables.records.SupplementsRecord;
 
 
@@ -62,48 +61,12 @@ public class Supplements extends TableImpl<SupplementsRecord> {
     /**
      * The column <code>public.supplements.id</code>. サプリメントID
      */
-    public final TableField<SupplementsRecord, UUID> ID = createField(DSL.name("id"), SQLDataType.UUID.nullable(false), this, "サプリメントID");
+    public final TableField<SupplementsRecord, Integer> ID = createField(DSL.name("id"), SQLDataType.INTEGER.nullable(false).identity(true), this, "サプリメントID");
 
     /**
      * The column <code>public.supplements.name</code>. サプリメント名
      */
     public final TableField<SupplementsRecord, String> NAME = createField(DSL.name("name"), SQLDataType.VARCHAR(255).nullable(false), this, "サプリメント名");
-
-    /**
-     * The column <code>public.supplements.quantity</code>. 総量
-     */
-    public final TableField<SupplementsRecord, Integer> QUANTITY = createField(DSL.name("quantity"), SQLDataType.INTEGER.nullable(false), this, "総量");
-
-    /**
-     * The column <code>public.supplements.dosage_per_use</code>. 1回の摂取量
-     */
-    public final TableField<SupplementsRecord, Integer> DOSAGE_PER_USE = createField(DSL.name("dosage_per_use"), SQLDataType.INTEGER.nullable(false), this, "1回の摂取量");
-
-    /**
-     * The column <code>public.supplements.daily_intake_frequency</code>.
-     * 1日の摂取回数
-     */
-    public final TableField<SupplementsRecord, Integer> DAILY_INTAKE_FREQUENCY = createField(DSL.name("daily_intake_frequency"), SQLDataType.INTEGER.nullable(false), this, "1日の摂取回数");
-
-    /**
-     * The column <code>public.supplements.expired_at</code>. 賞味期限
-     */
-    public final TableField<SupplementsRecord, LocalDate> EXPIRED_AT = createField(DSL.name("expired_at"), SQLDataType.LOCALDATE.nullable(false), this, "賞味期限");
-
-    /**
-     * The column <code>public.supplements.start_at</code>. 摂取開始日
-     */
-    public final TableField<SupplementsRecord, LocalDate> START_AT = createField(DSL.name("start_at"), SQLDataType.LOCALDATE.nullable(false), this, "摂取開始日");
-
-    /**
-     * The column <code>public.supplements.end_at</code>. 摂取終了日
-     */
-    public final TableField<SupplementsRecord, LocalDate> END_AT = createField(DSL.name("end_at"), SQLDataType.LOCALDATE.nullable(false), this, "摂取終了日");
-
-    /**
-     * The column <code>public.supplements.group_name</code>. サプリメントグループ名
-     */
-    public final TableField<SupplementsRecord, String> GROUP_NAME = createField(DSL.name("group_name"), SQLDataType.VARCHAR(255), this, "サプリメントグループ名");
 
     /**
      * The column <code>public.supplements.created_at</code>.
@@ -181,26 +144,30 @@ public class Supplements extends TableImpl<SupplementsRecord> {
     }
 
     @Override
+    public Identity<SupplementsRecord, Integer> getIdentity() {
+        return (Identity<SupplementsRecord, Integer>) super.getIdentity();
+    }
+
+    @Override
     public UniqueKey<SupplementsRecord> getPrimaryKey() {
         return Keys.SUPPLEMENTS_PKEY;
     }
 
     @Override
-    public List<ForeignKey<SupplementsRecord, ?>> getReferences() {
-        return Arrays.asList(Keys.SUPPLEMENTS__SUPPLEMENTS_GROUP_NAME_FKEY);
+    public List<UniqueKey<SupplementsRecord>> getUniqueKeys() {
+        return Arrays.asList(Keys.SUPPLEMENTS_NAME_KEY);
     }
 
-    private transient SupplementGroupPath _supplementGroup;
+    private transient ItemsPath _items;
 
     /**
-     * Get the implicit join path to the <code>public.supplement_group</code>
-     * table.
+     * Get the implicit to-many join path to the <code>public.items</code> table
      */
-    public SupplementGroupPath supplementGroup() {
-        if (_supplementGroup == null)
-            _supplementGroup = new SupplementGroupPath(this, Keys.SUPPLEMENTS__SUPPLEMENTS_GROUP_NAME_FKEY, null);
+    public ItemsPath items() {
+        if (_items == null)
+            _items = new ItemsPath(this, null, Keys.ITEMS__ITEMS_SUPPLEMENT_ID_FKEY.getInverseKey());
 
-        return _supplementGroup;
+        return _items;
     }
 
     @Override

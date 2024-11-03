@@ -5,9 +5,7 @@ package supplement.tables.pojos;
 
 
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.UUID;
 
 
 /**
@@ -18,54 +16,26 @@ public class Supplements implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private final UUID id;
+    private final Integer id;
     private final String name;
-    private final Integer quantity;
-    private final Integer dosagePerUse;
-    private final Integer dailyIntakeFrequency;
-    private final LocalDate expiredAt;
-    private final LocalDate startAt;
-    private final LocalDate endAt;
-    private final String groupName;
     private final LocalDateTime createdAt;
     private final LocalDateTime updatedAt;
 
     public Supplements(Supplements value) {
         this.id = value.id;
         this.name = value.name;
-        this.quantity = value.quantity;
-        this.dosagePerUse = value.dosagePerUse;
-        this.dailyIntakeFrequency = value.dailyIntakeFrequency;
-        this.expiredAt = value.expiredAt;
-        this.startAt = value.startAt;
-        this.endAt = value.endAt;
-        this.groupName = value.groupName;
         this.createdAt = value.createdAt;
         this.updatedAt = value.updatedAt;
     }
 
     public Supplements(
-        UUID id,
+        Integer id,
         String name,
-        Integer quantity,
-        Integer dosagePerUse,
-        Integer dailyIntakeFrequency,
-        LocalDate expiredAt,
-        LocalDate startAt,
-        LocalDate endAt,
-        String groupName,
         LocalDateTime createdAt,
         LocalDateTime updatedAt
     ) {
         this.id = id;
         this.name = name;
-        this.quantity = quantity;
-        this.dosagePerUse = dosagePerUse;
-        this.dailyIntakeFrequency = dailyIntakeFrequency;
-        this.expiredAt = expiredAt;
-        this.startAt = startAt;
-        this.endAt = endAt;
-        this.groupName = groupName;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
@@ -73,7 +43,7 @@ public class Supplements implements Serializable {
     /**
      * Getter for <code>public.supplements.id</code>. サプリメントID
      */
-    public UUID getId() {
+    public Integer getId() {
         return this.id;
     }
 
@@ -82,56 +52,6 @@ public class Supplements implements Serializable {
      */
     public String getName() {
         return this.name;
-    }
-
-    /**
-     * Getter for <code>public.supplements.quantity</code>. 総量
-     */
-    public Integer getQuantity() {
-        return this.quantity;
-    }
-
-    /**
-     * Getter for <code>public.supplements.dosage_per_use</code>. 1回の摂取量
-     */
-    public Integer getDosagePerUse() {
-        return this.dosagePerUse;
-    }
-
-    /**
-     * Getter for <code>public.supplements.daily_intake_frequency</code>.
-     * 1日の摂取回数
-     */
-    public Integer getDailyIntakeFrequency() {
-        return this.dailyIntakeFrequency;
-    }
-
-    /**
-     * Getter for <code>public.supplements.expired_at</code>. 賞味期限
-     */
-    public LocalDate getExpiredAt() {
-        return this.expiredAt;
-    }
-
-    /**
-     * Getter for <code>public.supplements.start_at</code>. 摂取開始日
-     */
-    public LocalDate getStartAt() {
-        return this.startAt;
-    }
-
-    /**
-     * Getter for <code>public.supplements.end_at</code>. 摂取終了日
-     */
-    public LocalDate getEndAt() {
-        return this.endAt;
-    }
-
-    /**
-     * Getter for <code>public.supplements.group_name</code>. サプリメントグループ名
-     */
-    public String getGroupName() {
-        return this.groupName;
     }
 
     /**
@@ -169,48 +89,6 @@ public class Supplements implements Serializable {
         }
         else if (!this.name.equals(other.name))
             return false;
-        if (this.quantity == null) {
-            if (other.quantity != null)
-                return false;
-        }
-        else if (!this.quantity.equals(other.quantity))
-            return false;
-        if (this.dosagePerUse == null) {
-            if (other.dosagePerUse != null)
-                return false;
-        }
-        else if (!this.dosagePerUse.equals(other.dosagePerUse))
-            return false;
-        if (this.dailyIntakeFrequency == null) {
-            if (other.dailyIntakeFrequency != null)
-                return false;
-        }
-        else if (!this.dailyIntakeFrequency.equals(other.dailyIntakeFrequency))
-            return false;
-        if (this.expiredAt == null) {
-            if (other.expiredAt != null)
-                return false;
-        }
-        else if (!this.expiredAt.equals(other.expiredAt))
-            return false;
-        if (this.startAt == null) {
-            if (other.startAt != null)
-                return false;
-        }
-        else if (!this.startAt.equals(other.startAt))
-            return false;
-        if (this.endAt == null) {
-            if (other.endAt != null)
-                return false;
-        }
-        else if (!this.endAt.equals(other.endAt))
-            return false;
-        if (this.groupName == null) {
-            if (other.groupName != null)
-                return false;
-        }
-        else if (!this.groupName.equals(other.groupName))
-            return false;
         if (this.createdAt == null) {
             if (other.createdAt != null)
                 return false;
@@ -232,13 +110,6 @@ public class Supplements implements Serializable {
         int result = 1;
         result = prime * result + ((this.id == null) ? 0 : this.id.hashCode());
         result = prime * result + ((this.name == null) ? 0 : this.name.hashCode());
-        result = prime * result + ((this.quantity == null) ? 0 : this.quantity.hashCode());
-        result = prime * result + ((this.dosagePerUse == null) ? 0 : this.dosagePerUse.hashCode());
-        result = prime * result + ((this.dailyIntakeFrequency == null) ? 0 : this.dailyIntakeFrequency.hashCode());
-        result = prime * result + ((this.expiredAt == null) ? 0 : this.expiredAt.hashCode());
-        result = prime * result + ((this.startAt == null) ? 0 : this.startAt.hashCode());
-        result = prime * result + ((this.endAt == null) ? 0 : this.endAt.hashCode());
-        result = prime * result + ((this.groupName == null) ? 0 : this.groupName.hashCode());
         result = prime * result + ((this.createdAt == null) ? 0 : this.createdAt.hashCode());
         result = prime * result + ((this.updatedAt == null) ? 0 : this.updatedAt.hashCode());
         return result;
@@ -250,13 +121,6 @@ public class Supplements implements Serializable {
 
         sb.append(id);
         sb.append(", ").append(name);
-        sb.append(", ").append(quantity);
-        sb.append(", ").append(dosagePerUse);
-        sb.append(", ").append(dailyIntakeFrequency);
-        sb.append(", ").append(expiredAt);
-        sb.append(", ").append(startAt);
-        sb.append(", ").append(endAt);
-        sb.append(", ").append(groupName);
         sb.append(", ").append(createdAt);
         sb.append(", ").append(updatedAt);
 

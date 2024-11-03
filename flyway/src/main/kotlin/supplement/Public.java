@@ -12,7 +12,7 @@ import org.jooq.Table;
 import org.jooq.impl.SchemaImpl;
 
 import supplement.tables.FlywaySchemaHistory;
-import supplement.tables.SupplementGroup;
+import supplement.tables.Items;
 import supplement.tables.Supplements;
 
 
@@ -35,9 +35,9 @@ public class Public extends SchemaImpl {
     public final FlywaySchemaHistory FLYWAY_SCHEMA_HISTORY = FlywaySchemaHistory.FLYWAY_SCHEMA_HISTORY;
 
     /**
-     * サプリメントグループテーブル
+     * 商品テーブル
      */
-    public final SupplementGroup SUPPLEMENT_GROUP = SupplementGroup.SUPPLEMENT_GROUP;
+    public final Items ITEMS = Items.ITEMS;
 
     /**
      * サプリメントテーブル
@@ -61,7 +61,7 @@ public class Public extends SchemaImpl {
     public final List<Table<?>> getTables() {
         return Arrays.asList(
             FlywaySchemaHistory.FLYWAY_SCHEMA_HISTORY,
-            SupplementGroup.SUPPLEMENT_GROUP,
+            Items.ITEMS,
             Supplements.SUPPLEMENTS
         );
     }

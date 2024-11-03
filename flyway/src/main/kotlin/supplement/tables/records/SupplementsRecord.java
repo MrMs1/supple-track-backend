@@ -4,9 +4,7 @@
 package supplement.tables.records;
 
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.UUID;
 
 import org.jooq.Record1;
 import org.jooq.impl.UpdatableRecordImpl;
@@ -25,7 +23,7 @@ public class SupplementsRecord extends UpdatableRecordImpl<SupplementsRecord> {
     /**
      * Setter for <code>public.supplements.id</code>. サプリメントID
      */
-    public SupplementsRecord setId(UUID value) {
+    public SupplementsRecord setId(Integer value) {
         set(0, value);
         return this;
     }
@@ -33,8 +31,8 @@ public class SupplementsRecord extends UpdatableRecordImpl<SupplementsRecord> {
     /**
      * Getter for <code>public.supplements.id</code>. サプリメントID
      */
-    public UUID getId() {
-        return (UUID) get(0);
+    public Integer getId() {
+        return (Integer) get(0);
     }
 
     /**
@@ -53,117 +51,10 @@ public class SupplementsRecord extends UpdatableRecordImpl<SupplementsRecord> {
     }
 
     /**
-     * Setter for <code>public.supplements.quantity</code>. 総量
-     */
-    public SupplementsRecord setQuantity(Integer value) {
-        set(2, value);
-        return this;
-    }
-
-    /**
-     * Getter for <code>public.supplements.quantity</code>. 総量
-     */
-    public Integer getQuantity() {
-        return (Integer) get(2);
-    }
-
-    /**
-     * Setter for <code>public.supplements.dosage_per_use</code>. 1回の摂取量
-     */
-    public SupplementsRecord setDosagePerUse(Integer value) {
-        set(3, value);
-        return this;
-    }
-
-    /**
-     * Getter for <code>public.supplements.dosage_per_use</code>. 1回の摂取量
-     */
-    public Integer getDosagePerUse() {
-        return (Integer) get(3);
-    }
-
-    /**
-     * Setter for <code>public.supplements.daily_intake_frequency</code>.
-     * 1日の摂取回数
-     */
-    public SupplementsRecord setDailyIntakeFrequency(Integer value) {
-        set(4, value);
-        return this;
-    }
-
-    /**
-     * Getter for <code>public.supplements.daily_intake_frequency</code>.
-     * 1日の摂取回数
-     */
-    public Integer getDailyIntakeFrequency() {
-        return (Integer) get(4);
-    }
-
-    /**
-     * Setter for <code>public.supplements.expired_at</code>. 賞味期限
-     */
-    public SupplementsRecord setExpiredAt(LocalDate value) {
-        set(5, value);
-        return this;
-    }
-
-    /**
-     * Getter for <code>public.supplements.expired_at</code>. 賞味期限
-     */
-    public LocalDate getExpiredAt() {
-        return (LocalDate) get(5);
-    }
-
-    /**
-     * Setter for <code>public.supplements.start_at</code>. 摂取開始日
-     */
-    public SupplementsRecord setStartAt(LocalDate value) {
-        set(6, value);
-        return this;
-    }
-
-    /**
-     * Getter for <code>public.supplements.start_at</code>. 摂取開始日
-     */
-    public LocalDate getStartAt() {
-        return (LocalDate) get(6);
-    }
-
-    /**
-     * Setter for <code>public.supplements.end_at</code>. 摂取終了日
-     */
-    public SupplementsRecord setEndAt(LocalDate value) {
-        set(7, value);
-        return this;
-    }
-
-    /**
-     * Getter for <code>public.supplements.end_at</code>. 摂取終了日
-     */
-    public LocalDate getEndAt() {
-        return (LocalDate) get(7);
-    }
-
-    /**
-     * Setter for <code>public.supplements.group_name</code>. サプリメントグループ名
-     */
-    public SupplementsRecord setGroupName(String value) {
-        set(8, value);
-        return this;
-    }
-
-    /**
-     * Getter for <code>public.supplements.group_name</code>. サプリメントグループ名
-     */
-    public String getGroupName() {
-        return (String) get(8);
-    }
-
-    /**
      * Setter for <code>public.supplements.created_at</code>.
      */
     public SupplementsRecord setCreatedAt(LocalDateTime value) {
-        set(9, value);
+        set(2, value);
         return this;
     }
 
@@ -171,14 +62,14 @@ public class SupplementsRecord extends UpdatableRecordImpl<SupplementsRecord> {
      * Getter for <code>public.supplements.created_at</code>.
      */
     public LocalDateTime getCreatedAt() {
-        return (LocalDateTime) get(9);
+        return (LocalDateTime) get(2);
     }
 
     /**
      * Setter for <code>public.supplements.updated_at</code>.
      */
     public SupplementsRecord setUpdatedAt(LocalDateTime value) {
-        set(10, value);
+        set(3, value);
         return this;
     }
 
@@ -186,7 +77,7 @@ public class SupplementsRecord extends UpdatableRecordImpl<SupplementsRecord> {
      * Getter for <code>public.supplements.updated_at</code>.
      */
     public LocalDateTime getUpdatedAt() {
-        return (LocalDateTime) get(10);
+        return (LocalDateTime) get(3);
     }
 
     // -------------------------------------------------------------------------
@@ -194,7 +85,7 @@ public class SupplementsRecord extends UpdatableRecordImpl<SupplementsRecord> {
     // -------------------------------------------------------------------------
 
     @Override
-    public Record1<UUID> key() {
+    public Record1<Integer> key() {
         return (Record1) super.key();
     }
 
@@ -212,18 +103,11 @@ public class SupplementsRecord extends UpdatableRecordImpl<SupplementsRecord> {
     /**
      * Create a detached, initialised SupplementsRecord
      */
-    public SupplementsRecord(UUID id, String name, Integer quantity, Integer dosagePerUse, Integer dailyIntakeFrequency, LocalDate expiredAt, LocalDate startAt, LocalDate endAt, String groupName, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public SupplementsRecord(Integer id, String name, LocalDateTime createdAt, LocalDateTime updatedAt) {
         super(Supplements.SUPPLEMENTS);
 
         setId(id);
         setName(name);
-        setQuantity(quantity);
-        setDosagePerUse(dosagePerUse);
-        setDailyIntakeFrequency(dailyIntakeFrequency);
-        setExpiredAt(expiredAt);
-        setStartAt(startAt);
-        setEndAt(endAt);
-        setGroupName(groupName);
         setCreatedAt(createdAt);
         setUpdatedAt(updatedAt);
         resetChangedOnNotNull();
@@ -238,13 +122,6 @@ public class SupplementsRecord extends UpdatableRecordImpl<SupplementsRecord> {
         if (value != null) {
             setId(value.getId());
             setName(value.getName());
-            setQuantity(value.getQuantity());
-            setDosagePerUse(value.getDosagePerUse());
-            setDailyIntakeFrequency(value.getDailyIntakeFrequency());
-            setExpiredAt(value.getExpiredAt());
-            setStartAt(value.getStartAt());
-            setEndAt(value.getEndAt());
-            setGroupName(value.getGroupName());
             setCreatedAt(value.getCreatedAt());
             setUpdatedAt(value.getUpdatedAt());
             resetChangedOnNotNull();
