@@ -1,8 +1,8 @@
-package com.mrms.suppletrack.presentation.dto
+package com.mrms.suppletrack.usecase.dto
 
 import java.time.LocalDate
 
-data class SupplementRegisterDto(
+data class ItemRegisterCommand(
     val supplementName: String,
     val itemName: String,
     val quantity: Int,

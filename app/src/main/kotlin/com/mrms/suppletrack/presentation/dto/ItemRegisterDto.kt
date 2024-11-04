@@ -2,7 +2,7 @@ package com.mrms.suppletrack.presentation.dto
 
 import java.time.LocalDate
 
-data class SupplementRegisterDto(
+data class ItemRegisterDto(
     val supplementName: String,
     val itemName: String,
     val quantity: Int,
