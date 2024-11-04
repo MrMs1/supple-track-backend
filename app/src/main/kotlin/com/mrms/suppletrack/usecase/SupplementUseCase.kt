@@ -1,8 +1,10 @@
 package com.mrms.suppletrack.usecase
 
 import com.mrms.suppletrack.domain.repository.SupplementRepository
+import com.mrms.suppletrack.domain.supplement.Item
 import com.mrms.suppletrack.domain.supplement.Supplement
 import com.mrms.suppletrack.domain.supplement.SupplementService
+import com.mrms.suppletrack.usecase.dto.ItemRegisterCommand
 import com.mrms.suppletrack.usecase.dto.SupplementRegisterCommand
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
@@ -24,5 +26,23 @@ class SupplementUseCase
                 command.expiredAt,
                 command.startAt,
             )
+        }
+
+        fun addItem(command: ItemRegisterCommand): Item {
+            val item =
+                Item.create(
+                    name = command.itemName,
+                    quantity = command.quantity,
+                    dosagePerUse = command.dosagePerUse,
+                    dailyIntakeFrequency = command.dailyIntakeFrequency,
+                    expiredAt = command.expiredAt,
+                    startAt = command.startAt,
+                )
+
+            return supplementRepository.saveItem(command.supplementName, item)
+        }
+
+        fun getSupplements(): List<Supplement> {
+            return supplementRepository.getSupplements()
         }
     }
