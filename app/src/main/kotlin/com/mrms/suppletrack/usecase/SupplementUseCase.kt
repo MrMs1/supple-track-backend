@@ -8,6 +8,7 @@ import com.mrms.suppletrack.usecase.dto.ItemRegisterCommand
 import com.mrms.suppletrack.usecase.dto.SupplementRegisterCommand
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
+import java.util.UUID
 
 @Service
 class SupplementUseCase
@@ -44,5 +45,9 @@ class SupplementUseCase
 
         fun getSupplements(): List<Supplement> {
             return supplementRepository.getSupplements()
+        }
+
+        fun removeItem(id: UUID) {
+            supplementRepository.removeItem(id)
         }
     }

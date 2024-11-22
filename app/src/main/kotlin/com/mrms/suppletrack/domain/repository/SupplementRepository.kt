@@ -2,6 +2,7 @@ package com.mrms.suppletrack.domain.repository
 
 import com.mrms.suppletrack.domain.supplement.Item
 import com.mrms.suppletrack.domain.supplement.Supplement
+import java.util.UUID
 
 interface SupplementRepository {
     fun save(supplement: Supplement): Supplement
@@ -12,4 +13,6 @@ interface SupplementRepository {
     ): Item
 
     fun getSupplements(): List<Supplement>
+
+    fun removeItem(id: UUID)
 }

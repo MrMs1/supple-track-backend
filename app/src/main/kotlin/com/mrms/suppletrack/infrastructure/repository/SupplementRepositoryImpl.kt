@@ -10,6 +10,7 @@ import supplement.Tables.ITEMS
 import supplement.Tables.SUPPLEMENTS
 import supplement.tables.records.ItemsRecord
 import supplement.tables.records.SupplementsRecord
+import java.util.UUID
 
 @Repository
 class SupplementRepositoryImpl
@@ -138,5 +139,11 @@ class SupplementRepositoryImpl
                 name = this.name,
                 items = itemsRecords.map { it.toItem() },
             )
+        }
+
+        override fun removeItem(id: UUID) {
+            context.deleteFrom(ITEMS)
+                .where(ITEMS.ID.eq(id))
+                .execute()
         }
     }
