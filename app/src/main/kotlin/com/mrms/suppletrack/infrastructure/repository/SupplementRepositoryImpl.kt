@@ -141,6 +141,25 @@ class SupplementRepositoryImpl
             )
         }
 
+        override fun removeSupplement(name: String) {
+            // サプリメントに紐づく商品を削除
+            context.select(SUPPLEMENTS.ID)
+                .from(SUPPLEMENTS)
+                .where(SUPPLEMENTS.NAME.eq(name))
+                .fetchOne()
+                ?.into(SUPPLEMENTS)
+                ?.id
+                ?.let {
+                    context.deleteFrom(ITEMS)
+                        .where(ITEMS.SUPPLEMENT_ID.eq(it))
+                        .execute()
+                }
+            // サプリメントを削除
+            context.deleteFrom(SUPPLEMENTS)
+                .where(SUPPLEMENTS.NAME.eq(name))
+                .execute()
+        }
+
         override fun removeItem(id: UUID) {
             context.deleteFrom(ITEMS)
                 .where(ITEMS.ID.eq(id))

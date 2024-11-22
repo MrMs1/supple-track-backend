@@ -3,8 +3,10 @@ package com.mrms.suppletrack.presentation
 import com.mrms.suppletrack.domain.supplement.Supplement
 import com.mrms.suppletrack.presentation.convertor.toCommand
 import com.mrms.suppletrack.presentation.dto.ItemRegisterDto
+import com.mrms.suppletrack.presentation.dto.RemoveSupplementRequest
 import com.mrms.suppletrack.presentation.dto.SupplementRegisterDto
 import com.mrms.suppletrack.usecase.SupplementUseCase
+import com.mrms.suppletrack.usecase.dto.SupplementRemoveCommand
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.DeleteMapping
@@ -43,6 +45,14 @@ class SuppleTrackController
         fun getSupplements(): ResponseEntity<List<Supplement>> {
             val result = supplementUseCase.getSupplements()
             return ResponseEntity.ok(result)
+        }
+
+        @DeleteMapping("supplement")
+        fun removeSupplement(
+            @RequestBody removeSupplementRequest: RemoveSupplementRequest,
+        ): ResponseEntity<Unit> {
+            supplementUseCase.removeSupplement(SupplementRemoveCommand(removeSupplementRequest.name))
+            return ResponseEntity.noContent().build()
         }
 
         @DeleteMapping("/item/{id}")

@@ -14,5 +14,7 @@ interface SupplementRepository {
 
     fun getSupplements(): List<Supplement>
 
+    fun removeSupplement(name: String)
+
     fun removeItem(id: UUID)
 }
