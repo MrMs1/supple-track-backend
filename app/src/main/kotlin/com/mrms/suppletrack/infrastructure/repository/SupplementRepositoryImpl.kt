@@ -51,14 +51,14 @@ class SupplementRepositoryImpl
                 ITEMS.EXPIRED_AT,
                 ITEMS.START_AT,
                 ITEMS.END_AT,
-            ).from(ITEMS)
-                .leftJoin(SUPPLEMENTS)
+            ).from(SUPPLEMENTS)
+                .leftJoin(ITEMS)
                 .on(ITEMS.SUPPLEMENT_ID.eq(SUPPLEMENTS.ID))
                 .fetch()
                 .groupBy { it[SUPPLEMENTS.ID] }
                 .mapValues { entry ->
                     val supplementRecord = entry.value.first().into(SUPPLEMENTS)
-                    val itemRecords = entry.value.map { it.into(ITEMS) }
+                    val itemRecords = entry.value.filter { it[ITEMS.ID] != null }.map { it.into(ITEMS) }
                     supplementRecord.toSupplement(itemRecords)
                 }.values.toList()
         }
