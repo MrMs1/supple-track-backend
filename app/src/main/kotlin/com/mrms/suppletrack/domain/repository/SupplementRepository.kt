@@ -14,7 +14,11 @@ interface SupplementRepository {
 
     fun getSupplements(): List<Supplement>
 
+    fun getItem(id: UUID): Item
+
     fun removeSupplement(name: String)
 
     fun removeItem(id: UUID)
+
+    fun updateItem(item: Item): Item
 }

@@ -62,6 +62,41 @@ class SupplementRepositoryImpl
                 }.values.toList()
         }
 
+        override fun getItem(id: UUID): Item {
+            return context.select(
+                ITEMS.ID,
+                ITEMS.NAME,
+                ITEMS.DOSAGE_PER_USE,
+                ITEMS.QUANTITY,
+                ITEMS.DAILY_INTAKE_FREQUENCY,
+                ITEMS.SUPPLY_DAYS,
+                ITEMS.EXPIRED_AT,
+                ITEMS.START_AT,
+                ITEMS.END_AT,
+            ).from(ITEMS)
+                .where(ITEMS.ID.eq(id))
+                .fetchOne()!!
+                .into(ITEMS)
+                .toItem()
+        }
+
+        override fun updateItem(item: Item): Item {
+            return context.update(ITEMS)
+                .set(ITEMS.NAME, item.name)
+                .set(ITEMS.DOSAGE_PER_USE, item.dosagePerUse)
+                .set(ITEMS.QUANTITY, item.quantity)
+                .set(ITEMS.DAILY_INTAKE_FREQUENCY, item.dailyIntakeFrequency)
+                .set(ITEMS.SUPPLY_DAYS, item.supplyDays)
+                .set(ITEMS.EXPIRED_AT, item.expiredAt)
+                .set(ITEMS.START_AT, item.startAt)
+                .set(ITEMS.END_AT, item.endAt)
+                .where(ITEMS.ID.eq(item.id))
+                .returning()
+                .fetchOne()!!
+                .into(ITEMS)
+                .toItem()
+        }
+
         private fun createSupplementIfNotExist(supplementName: String): SupplementsRecord {
             val existSupplement =
                 context
