@@ -4,9 +4,12 @@ import com.mrms.suppletrack.domain.repository.SupplementRepository
 import com.mrms.suppletrack.domain.supplement.Item
 import com.mrms.suppletrack.domain.supplement.Supplement
 import com.mrms.suppletrack.domain.supplement.SupplementService
+import com.mrms.suppletrack.usecase.command.SupplementCommandService
 import com.mrms.suppletrack.usecase.dto.ItemRegisterCommand
 import com.mrms.suppletrack.usecase.dto.SupplementRegisterCommand
 import com.mrms.suppletrack.usecase.dto.SupplementRemoveCommand
+import com.mrms.suppletrack.usecase.dto.UpdateSupplementCommand
+import com.mrms.suppletrack.usecase.dto.UpdateSupplementCommandResult
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import java.util.UUID
@@ -17,6 +20,7 @@ class SupplementUseCase
     constructor(
         private val supplementRepository: SupplementRepository,
         private val supplementService: SupplementService,
+        private val supplementCommandService: SupplementCommandService,
     ) {
         fun createSupplement(command: SupplementRegisterCommand): Supplement {
             return supplementService.createSupplement(
@@ -54,5 +58,9 @@ class SupplementUseCase
 
         fun removeItem(id: UUID) {
             supplementRepository.removeItem(id)
+        }
+
+        fun updateSupplement(command: UpdateSupplementCommand): UpdateSupplementCommandResult {
+            return UpdateSupplementCommandResult(supplementCommandService.updateSupplement(command.name))
         }
     }
