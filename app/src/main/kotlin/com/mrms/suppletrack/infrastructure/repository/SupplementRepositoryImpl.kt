@@ -10,6 +10,7 @@ import supplement.Tables.ITEMS
 import supplement.Tables.SUPPLEMENTS
 import supplement.tables.records.ItemsRecord
 import supplement.tables.records.SupplementsRecord
+import java.time.LocalDateTime
 import java.util.UUID
 
 @Repository
@@ -90,6 +91,7 @@ class SupplementRepositoryImpl
                 .set(ITEMS.EXPIRED_AT, item.expiredAt)
                 .set(ITEMS.START_AT, item.startAt)
                 .set(ITEMS.END_AT, item.endAt)
+                .set(ITEMS.UPDATED_AT, LocalDateTime.now())
                 .where(ITEMS.ID.eq(item.id))
                 .returning()
                 .fetchOne()!!

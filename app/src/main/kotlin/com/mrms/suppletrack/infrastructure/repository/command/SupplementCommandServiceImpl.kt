@@ -5,6 +5,7 @@ import org.jooq.DSLContext
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Repository
 import supplement.Tables.SUPPLEMENTS
+import java.time.LocalDateTime
 
 @Repository
 class SupplementCommandServiceImpl
@@ -22,6 +23,7 @@ class SupplementCommandServiceImpl
                 .let {
                     context.update(SUPPLEMENTS)
                         .set(SUPPLEMENTS.NAME, name)
+                        .set(SUPPLEMENTS.UPDATED_AT, LocalDateTime.now())
                         .where(SUPPLEMENTS.ID.eq(it))
                         .returning()
                         .fetchOne()!!
