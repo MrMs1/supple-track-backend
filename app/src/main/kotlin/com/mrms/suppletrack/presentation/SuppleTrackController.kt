@@ -1,10 +1,12 @@
 package com.mrms.suppletrack.presentation
 
+import com.mrms.suppletrack.domain.supplement.Item
 import com.mrms.suppletrack.domain.supplement.Supplement
 import com.mrms.suppletrack.presentation.convertor.toCommand
 import com.mrms.suppletrack.presentation.dto.ItemRegisterDto
 import com.mrms.suppletrack.presentation.dto.RemoveSupplementRequest
 import com.mrms.suppletrack.presentation.dto.SupplementRegisterDto
+import com.mrms.suppletrack.presentation.dto.UpdateItemRequest
 import com.mrms.suppletrack.presentation.dto.UpdateSupplementRequest
 import com.mrms.suppletrack.usecase.SupplementUseCase
 import com.mrms.suppletrack.usecase.dto.SupplementRemoveCommand
@@ -69,8 +71,17 @@ class SuppleTrackController
         @PatchMapping("/supplement")
         fun updateSupplement(
             @RequestBody updateSupplementRequest: UpdateSupplementRequest,
-        ): ResponseEntity<Unit> {
-            supplementUseCase.updateSupplement(UpdateSupplementCommand(updateSupplementRequest.name))
-            return ResponseEntity.ok().build()
+        ): ResponseEntity<String> {
+            val result = supplementUseCase.updateSupplement(UpdateSupplementCommand(updateSupplementRequest.name))
+            return ResponseEntity.ok(result.name)
+        }
+
+        @PatchMapping("/item/{id}")
+        fun updateItem(
+            @PathVariable id: UUID,
+            @RequestBody updateItemRequest: UpdateItemRequest,
+        ): ResponseEntity<Item> {
+            val result = supplementUseCase.updateItem(updateItemRequest.toCommand(id))
+            return ResponseEntity.ok(result)
         }
     }

@@ -8,6 +8,7 @@ import com.mrms.suppletrack.usecase.command.SupplementCommandService
 import com.mrms.suppletrack.usecase.dto.ItemRegisterCommand
 import com.mrms.suppletrack.usecase.dto.SupplementRegisterCommand
 import com.mrms.suppletrack.usecase.dto.SupplementRemoveCommand
+import com.mrms.suppletrack.usecase.dto.UpdateItemCommand
 import com.mrms.suppletrack.usecase.dto.UpdateSupplementCommand
 import com.mrms.suppletrack.usecase.dto.UpdateSupplementCommandResult
 import org.springframework.beans.factory.annotation.Autowired
@@ -62,5 +63,19 @@ class SupplementUseCase
 
         fun updateSupplement(command: UpdateSupplementCommand): UpdateSupplementCommandResult {
             return UpdateSupplementCommandResult(supplementCommandService.updateSupplement(command.name))
+        }
+
+        fun updateItem(command: UpdateItemCommand): Item {
+            val targetItem = supplementRepository.getItem(command.id)
+            val updatedItem =
+                targetItem.update(
+                    command.itemName,
+                    command.quantity,
+                    command.dosagePerUse,
+                    command.dailyIntakeFrequency,
+                    command.expiredAt,
+                    command.startAt,
+                )
+            return supplementRepository.updateItem(updatedItem)
         }
     }

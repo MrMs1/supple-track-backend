@@ -52,4 +52,30 @@ data class Item(
             return startAt.plusDays(supplyDays.toLong())
         }
     }
+
+    fun update(
+        name: String?,
+        quantity: Int?,
+        dosagePerUse: Int?,
+        dailyIntakeFrequency: Int?,
+        expiredAt: LocalDate?,
+        startAt: LocalDate?,
+    ): Item {
+        val newQuantity = quantity ?: this.quantity
+        val newDosagePerUse = dosagePerUse ?: this.dosagePerUse
+        val newDailyIntakeFrequency = dailyIntakeFrequency ?: this.dailyIntakeFrequency
+        val newStartAt = startAt ?: this.startAt
+
+        val supplyDays = calculateSupplyDays(newQuantity, newDosagePerUse, newDailyIntakeFrequency)
+        return copy(
+            name = name ?: this.name,
+            quantity = newQuantity,
+            dosagePerUse = newDosagePerUse,
+            dailyIntakeFrequency = newDailyIntakeFrequency,
+            supplyDays = supplyDays,
+            expiredAt = expiredAt ?: this.expiredAt,
+            startAt = newStartAt,
+            endAt = calculateEndAt(supplyDays, newStartAt),
+        )
+    }
 }
