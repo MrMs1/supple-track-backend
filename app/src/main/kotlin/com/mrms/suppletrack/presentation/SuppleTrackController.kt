@@ -5,12 +5,15 @@ import com.mrms.suppletrack.presentation.convertor.toCommand
 import com.mrms.suppletrack.presentation.dto.ItemRegisterDto
 import com.mrms.suppletrack.presentation.dto.RemoveSupplementRequest
 import com.mrms.suppletrack.presentation.dto.SupplementRegisterDto
+import com.mrms.suppletrack.presentation.dto.UpdateSupplementRequest
 import com.mrms.suppletrack.usecase.SupplementUseCase
 import com.mrms.suppletrack.usecase.dto.SupplementRemoveCommand
+import com.mrms.suppletrack.usecase.dto.UpdateSupplementCommand
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PatchMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
@@ -61,5 +64,13 @@ class SuppleTrackController
         ): ResponseEntity<Unit> {
             supplementUseCase.removeItem(id)
             return ResponseEntity.noContent().build()
+        }
+
+        @PatchMapping("/supplement")
+        fun updateSupplement(
+            @RequestBody updateSupplementRequest: UpdateSupplementRequest,
+        ): ResponseEntity<Unit> {
+            supplementUseCase.updateSupplement(UpdateSupplementCommand(updateSupplementRequest.name))
+            return ResponseEntity.ok().build()
         }
     }
