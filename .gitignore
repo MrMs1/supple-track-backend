@@ -29,3 +29,4 @@ replay_pid*
 .gradle/
 .DS_Store
 build/
+!gradle/wrapper/gradle-wrapper.jar
