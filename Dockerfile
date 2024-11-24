@@ -1,6 +1,8 @@
 FROM amazoncorretto:17-alpine as builder
 WORKDIR /app
-COPY . .
+COPY app ./app
+COPY gradle ./gradle
+COPY build.gradle settings.gradle gradlew ./
 RUN ./gradlew :app:bootJar -x :flyway:generateJooq --no-daemon
 
 FROM amazoncorretto:17-alpine
