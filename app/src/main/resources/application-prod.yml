@@ -8,3 +8,8 @@ spring:
         locations: classpath:db/migration
         baseline-on-migrate: true
         baseline-version: 0
+    cors:
+        allowed-origins:
+            - ${FRONTEND_URL}
+    server:
+        port: ${PORT:8080}
