@@ -9,7 +9,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer
 @Configuration
 class WebConfig @Autowired
 constructor(
-    @Value("\${cors.allowed-origins}") private val allowedOrigins: List<String>,
+    @Value("\${spring.cors.allowed-origins}") private val allowedOrigins: List<String>,
 ) : WebMvcConfigurer {
     override fun addCorsMappings(registry: CorsRegistry) {
         registry.addMapping("/api/**") // APIのパスパターン
