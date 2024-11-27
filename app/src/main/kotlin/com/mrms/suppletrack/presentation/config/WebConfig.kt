@@ -7,15 +7,16 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer
 
 @Configuration
-class WebConfig @Autowired
-constructor(
-    @Value("\${spring.cors.allowed-origins}") private val allowedOrigins: List<String>,
-) : WebMvcConfigurer {
-    override fun addCorsMappings(registry: CorsRegistry) {
-        registry.addMapping("/api/**") // APIのパスパターン
-            .allowedOrigins(*allowedOrigins.toTypedArray()) // フロントエンドのURL
-            .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
-            .allowedHeaders("*")
-            .allowCredentials(true)
+class WebConfig
+    @Autowired
+    constructor(
+        @Value("\${spring.cors.allowed-origins[0]}") private val allowedOrigin: String,
+    ) : WebMvcConfigurer {
+        override fun addCorsMappings(registry: CorsRegistry) {
+            registry.addMapping("/api/**") // APIのパスパターン
+                .allowedOrigins(allowedOrigin) // フロントエンドのURL
+                .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
+                .allowedHeaders("*")
+                .allowCredentials(true)
+        }
     }
-}

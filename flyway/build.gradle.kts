@@ -67,3 +67,9 @@ jooq {
         }
     }
 }
+
+// jOOQの生成タスクをデフォルトで無効化
+tasks.named("generateJooq") {
+    // デフォルトで無効
+    enabled = false
+}

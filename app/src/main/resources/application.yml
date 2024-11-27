@@ -2,7 +2,7 @@ spring:
     application:
         name: suppletrack
     datasource:
-        url: jdbc:postgresql://suppletrack-postgres:5432/suppletrack
+        url: jdbc:postgresql://localhost:5432/suppletrack
         username: postgres
         password: password
         driver-class-name: org.postgresql.Driver
