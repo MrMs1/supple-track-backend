@@ -1,4 +1,4 @@
-CREATE TABLE supplements
+CREATE TABLE IF NOT EXISTS supplements
 (
     id         SERIAL PRIMARY KEY,
     name       VARCHAR(255) NOT NULL    UNIQUE,
@@ -9,7 +9,7 @@ COMMENT ON TABLE supplements IS 'サプリメントテーブル';
 COMMENT ON COLUMN supplements.id IS 'サプリメントID';
 COMMENT ON COLUMN supplements.name IS 'サプリメント名';
 
-CREATE TABLE items
+CREATE TABLE IF NOT EXISTS items
 (
     id                     UUID PRIMARY KEY,
     name                   VARCHAR(255) NOT NULL,
@@ -31,7 +31,7 @@ COMMENT ON COLUMN items.quantity IS '総量';
 COMMENT ON COLUMN items.dosage_per_use IS '1回の摂取量';
 COMMENT ON COLUMN items.daily_intake_frequency IS '1日の摂取回数';
 COMMENT ON COLUMN items.supply_days IS '供給日数';
-COMMENT ON COLUMN items.expired_at IS '賞味期限';
+COMMENT ON COLUMN items.expired_at IS '消費期限';
 COMMENT ON COLUMN items.start_at IS '摂取開始日';
 COMMENT ON COLUMN items.end_at IS '摂取終了日';
 COMMENT ON COLUMN items.supplement_id IS 'サプリメントID';
