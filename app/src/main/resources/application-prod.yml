@@ -8,16 +8,3 @@ spring:
             - ${FRONTEND_URL}
 server:
     port: ${PORT:8080}
-
-# ヘルスチェック用の設定
-management:
-    endpoints:
-        web:
-            base-path: /
-            exposure:
-                include: health
-    endpoint:
-        health:
-            show-details: never
-            probes:
-                enabled: true
