@@ -13,3 +13,9 @@ spring:
     cors:
         allowed-origins:
             - "http://localhost:3000"
+
+logging:
+    level:
+        org.springframework.security: DEBUG
+        org.springframework.web: DEBUG
+        org.springframework.web.cors: TRACE
