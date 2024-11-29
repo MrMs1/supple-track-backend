@@ -15,7 +15,7 @@ class WebConfig
         override fun addCorsMappings(registry: CorsRegistry) {
             registry.addMapping("/api/**") // APIのパスパターン
                 .allowedOrigins(allowedOrigin) // フロントエンドのURL
-                .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
+                .allowedMethods("*")
                 .allowedHeaders("*")
                 .allowCredentials(true)
         }
