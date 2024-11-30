@@ -1,7 +1,6 @@
 FROM amazoncorretto:17-alpine as builder
 WORKDIR /workspace
 COPY . .
-RUN ls -la
 RUN ./gradlew :app:bootJar -x :flyway:generateJooq --no-daemon
 
 FROM amazoncorretto:17-alpine
