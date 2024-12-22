@@ -3,6 +3,7 @@ package com.mrms.suppletrack.infrastructure.repository
 import com.mrms.suppletrack.domain.repository.SupplementRepository
 import com.mrms.suppletrack.domain.supplement.Item
 import com.mrms.suppletrack.domain.supplement.Supplement
+import com.mrms.suppletrack.usecase.dto.SupplementResult
 import org.jooq.DSLContext
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Repository
@@ -38,7 +39,7 @@ class SupplementRepositoryImpl
             return insertItem(item, supplementsRecord.id).toItem()
         }
 
-        override fun getSupplements(): List<Supplement> {
+        override fun getSupplements(): List<SupplementResult> {
             return context.select(
                 SUPPLEMENTS.ID,
                 SUPPLEMENTS.NAME,
@@ -59,7 +60,7 @@ class SupplementRepositoryImpl
                 .mapValues { entry ->
                     val supplementRecord = entry.value.first().into(SUPPLEMENTS)
                     val itemRecords = entry.value.filter { it[ITEMS.ID] != null }.map { it.into(ITEMS) }
-                    supplementRecord.toSupplement(itemRecords)
+                    supplementRecord.toSupplementResult(itemRecords)
                 }.values.toList()
         }
 
@@ -173,6 +174,15 @@ class SupplementRepositoryImpl
             itemsRecords: List<ItemsRecord>,
         ): Supplement {
             return Supplement(
+                name = this.name,
+                items = itemsRecords.map { it.toItem() },
+            )
+        }
+
+        private fun SupplementsRecord.toSupplementResult(
+            itemsRecords: List<ItemsRecord>,
+        ): SupplementResult {
+            return SupplementResult(
                 name = this.name,
                 items = itemsRecords.map { it.toItem() },
             )

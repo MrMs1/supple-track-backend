@@ -2,6 +2,7 @@ package com.mrms.suppletrack.domain.repository
 
 import com.mrms.suppletrack.domain.supplement.Item
 import com.mrms.suppletrack.domain.supplement.Supplement
+import com.mrms.suppletrack.usecase.dto.SupplementResult
 import java.util.UUID
 
 interface SupplementRepository {
@@ -12,7 +13,7 @@ interface SupplementRepository {
         item: Item,
     ): Item
 
-    fun getSupplements(): List<Supplement>
+    fun getSupplements(): List<SupplementResult>
 
     fun getItem(id: UUID): Item
 
