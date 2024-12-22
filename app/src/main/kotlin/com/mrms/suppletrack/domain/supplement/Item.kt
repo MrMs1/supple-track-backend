@@ -14,6 +14,17 @@ data class Item(
     val startAt: LocalDate,
     val endAt: LocalDate,
 ) {
+    val restOfSupplyDays: Int
+        get() {
+            val today = LocalDate.now()
+            val endAtPeriod = endAt.toEpochDay() - today.toEpochDay()
+            return when {
+                endAtPeriod < 0 -> 0
+                endAtPeriod > supplyDays -> supplyDays
+                else -> endAtPeriod.toInt()
+            }
+        }
+
     companion object {
         fun create(
             name: String,

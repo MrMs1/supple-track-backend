@@ -1,7 +1,6 @@
 package com.mrms.suppletrack.presentation
 
 import com.mrms.suppletrack.domain.supplement.Item
-import com.mrms.suppletrack.domain.supplement.Supplement
 import com.mrms.suppletrack.presentation.convertor.toCommand
 import com.mrms.suppletrack.presentation.dto.ItemRegisterDto
 import com.mrms.suppletrack.presentation.dto.RemoveSupplementRequest
@@ -10,6 +9,7 @@ import com.mrms.suppletrack.presentation.dto.UpdateItemRequest
 import com.mrms.suppletrack.presentation.dto.UpdateSupplementRequest
 import com.mrms.suppletrack.usecase.SupplementUseCase
 import com.mrms.suppletrack.usecase.dto.SupplementRemoveCommand
+import com.mrms.suppletrack.usecase.dto.SupplementResult
 import com.mrms.suppletrack.usecase.dto.UpdateSupplementCommand
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
@@ -47,7 +47,7 @@ class SuppleTrackController
         }
 
         @GetMapping("/supplements")
-        fun getSupplements(): ResponseEntity<List<Supplement>> {
+        fun getSupplements(): ResponseEntity<List<SupplementResult>> {
             val result = supplementUseCase.getSupplements()
             return ResponseEntity.ok(result)
         }

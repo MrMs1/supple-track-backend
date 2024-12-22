@@ -8,6 +8,7 @@ import com.mrms.suppletrack.usecase.command.SupplementCommandService
 import com.mrms.suppletrack.usecase.dto.ItemRegisterCommand
 import com.mrms.suppletrack.usecase.dto.SupplementRegisterCommand
 import com.mrms.suppletrack.usecase.dto.SupplementRemoveCommand
+import com.mrms.suppletrack.usecase.dto.SupplementResult
 import com.mrms.suppletrack.usecase.dto.UpdateItemCommand
 import com.mrms.suppletrack.usecase.dto.UpdateSupplementCommand
 import com.mrms.suppletrack.usecase.dto.UpdateSupplementCommandResult
@@ -49,7 +50,7 @@ class SupplementUseCase
             return supplementRepository.saveItem(command.supplementName, item)
         }
 
-        fun getSupplements(): List<Supplement> {
+        fun getSupplements(): List<SupplementResult> {
             return supplementRepository.getSupplements()
         }
 
